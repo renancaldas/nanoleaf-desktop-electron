@@ -4,7 +4,9 @@
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "electron": "electron .",
+    "web": "cd web && npm start",
+    "start": "concurrently \"npm:web\" \"npm:electron\""
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
@@ -18,5 +20,8 @@
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^9.0.0"
+  },
+  "dependencies": {
+    "concurrently": "^5.2.0"
   }
 }
