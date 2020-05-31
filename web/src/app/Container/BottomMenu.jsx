@@ -2,6 +2,7 @@
 import React from 'react';
 import { useHistory } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
+import { v4 as uuid } from "uuid";
 
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
@@ -14,8 +15,6 @@ const useStyles = makeStyles({
         border: '1px solid red'
     }
 });
-
-
 
 const BottomMenu = ({ selectedRoute, setRoute }) => {
     const history = useHistory();
@@ -39,6 +38,7 @@ const BottomMenu = ({ selectedRoute, setRoute }) => {
                     routes.map(route => {
                         return (
                             <BottomNavigationAction
+                                key={uuid()}
                                 label={route.label}
                                 value={route.path}
                                 icon={route.icon}
