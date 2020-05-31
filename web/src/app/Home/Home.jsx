@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
+import './Home.css';
 import { Button } from '@material-ui/core';
 
 function App() {
@@ -9,10 +9,10 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Home
         </p>
         
-        <Button variant="contained" color="primary">
+        <Button variant="contained" color="primary" onClick={() => alert('yay')}>
           Hello World
         </Button>
       </header>
