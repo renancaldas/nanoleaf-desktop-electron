@@ -17,7 +17,7 @@ const App = (props) => {
       console.log(`:: App | dispatch | ${action} :: `, payload);
       dispatch({ type: action, payload });
     });
-  }, []);
+  }, [dispatch, props]);
 
   const onChangeRoute = (route) => {
     setRoute(route);

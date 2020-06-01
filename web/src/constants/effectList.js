@@ -1,0 +1,18 @@
+export default [
+  "Color Burst",
+  "Fireworks",
+  "Flames",
+  "Forest",
+  "Inner Peace",
+  "Meteor Shower",
+  "Nemo",
+  "Northern Lights",
+  "Paint Splatter",
+  "Pulse Pop Beats",
+  "Rhythmic Northern Lights",
+  "Ripple",
+  "Romantic",
+  "Snowfall",
+  "Sound Bar",
+  "Streaking Notes",
+];

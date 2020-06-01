@@ -70,6 +70,17 @@ io.on("connection", (socket) => {
       })
     );
   });
+
+  socket.on("SET_EFFECT_REQUEST", (value) => {
+    console.log(`::: Server ::: SET_EFFECT_REQUEST ${value}`);
+
+    api.setEffect(value).then((response) =>
+      socket.emit("dispatch", {
+        action: "SET_EFFECT_RESPONSE",
+        payload: response,
+      })
+    );
+  });
 });
 
 httpServer.listen(3001, () => {

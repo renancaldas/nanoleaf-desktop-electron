@@ -9,6 +9,8 @@ import {
   SET_HUE_RESPONSE,
   SET_SATURATION_REQUEST,
   SET_SATURATION_RESPONSE,
+  SET_EFFECT_REQUEST,
+  SET_EFFECT_RESPONSE
 } from "../actions";
 
 const defaultState = {
@@ -121,6 +123,27 @@ export default function reducer(state = defaultState, action) {
       return {
         ...state,
         saturation: {
+          loading: false,
+          data: action.payload,
+        },
+      };
+    }
+
+    // Set Effect ---------------------------------------------
+
+    case SET_EFFECT_REQUEST: {
+      return {
+        ...state,
+        effect: {
+          loading: true,
+        },
+      };
+    }
+
+    case SET_EFFECT_RESPONSE: {
+      return {
+        ...state,
+        effect: {
           loading: false,
           data: action.payload,
         },

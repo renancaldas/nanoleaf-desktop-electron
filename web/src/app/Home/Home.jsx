@@ -11,14 +11,17 @@ import Slider from "../Components/Slider";
 import Toggle from "../Components/Toggle";
 import ColorHue from "../Components/ColorHue";
 import ColorSaturation from "../Components/ColorSaturation";
+import EffectList from "../Components/EffectList";
 
 import {
   getControllerInfoAction,
   toggleLight,
   setBrightness,
   setHue,
-  setSaturation
+  setSaturation,
+  setEffect,
 } from "../../redux/actions/Nanoleaf";
+
 
 const useStyles = makeStyles({
   container: {
@@ -67,10 +70,18 @@ const Home = () => {
     dispatch(setSaturation(value));
   };
 
+  const onChangeEffect = (value) => {
+    console.log("onChangeEffect: ", value);
+    dispatch(setEffect(value));
+  };
+
   return (
     <div className={classes.container}>
       <div className={classes.header}>
         <Typography color="textPrimary">Nanoleaf</Typography>
+
+        <EffectList onChange={onChangeEffect} />
+
         <Toggle onChange={onToggleLight} />
       </div>
 
@@ -86,7 +97,7 @@ const Home = () => {
 
       <Card raised>
         <CardContent>
-          <ColorHue title="Color" onChange={onChangeHue}/>
+          <ColorHue title="Color" onChange={onChangeHue} />
         </CardContent>
       </Card>
 
@@ -94,7 +105,7 @@ const Home = () => {
 
       <Card raised>
         <CardContent>
-          <ColorSaturation title="Saturation" onChange={onChangeSaturation}/>
+          <ColorSaturation title="Saturation" onChange={onChangeSaturation} />
         </CardContent>
       </Card>
 

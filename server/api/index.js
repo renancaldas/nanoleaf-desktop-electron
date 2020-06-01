@@ -73,10 +73,25 @@ const setSaturation = (value) =>
       .catch(reject);
   });
 
+const setEffect = (value) =>
+  new Promise((resolve, reject) => {
+    axios({
+      method: "put",
+      url: `${baseUrl}/${authToken}/effects`,
+      data: { select: value },
+    })
+      .then(({ data, status }) => {
+        console.log(`::: Server ::: setBrightness ${status}: `, data);
+        resolve(data);
+      })
+      .catch(reject);
+  });
+
 module.exports = {
   getAllLightControllerInfo,
   toggleLight,
   setBrightness,
   setHue,
   setSaturation,
+  setEffect,
 };
