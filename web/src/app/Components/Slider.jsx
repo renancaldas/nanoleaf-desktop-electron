@@ -7,9 +7,6 @@ import BrightnessLow from "@material-ui/icons/BrightnessLow";
 import BrightnessHigh from "@material-ui/icons/BrightnessHigh";
 
 const useStyles = makeStyles({
-  root: {
-    width: 200,
-  },
   title: {
     fontSize: 14,
   },
@@ -36,7 +33,7 @@ const SliderComponent = ({ title = "Title", initialValue = 0, onChange }) => {
   };
 
   return (
-    <div className={classes.root}>
+    <div>
       <Typography
         className={classes.title}
         color="textSecondary"

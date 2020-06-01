@@ -8,7 +8,21 @@ const getAllLightControllerInfo = () =>
       url: `${baseUrl}/${authToken}`,
     })
       .then(({ data, status }) => {
-        console.log(`::: Server ::: Status ${status}: `, data);
+        console.log(`::: Server ::: getAllLightControllerInfo ${status}: `, data);
+        resolve(data);
+      })
+      .catch(reject);
+  });
+
+const toggleLight = (value) =>
+  new Promise((resolve, reject) => {
+    axios({
+      method: "put",
+      url: `${baseUrl}/${authToken}/state`,
+      data: { on: { value, }, },
+    })
+      .then(({ data, status }) => {
+        console.log(`::: Server ::: toggleLight ${status}: `, data);
         resolve(data);
       })
       .catch(reject);
@@ -22,7 +36,7 @@ const setBrightness = (value) =>
       data: { brightness: { value, duration: 0 } },
     })
       .then(({ data, status }) => {
-        console.log(`::: Server ::: Status ${status}: `, data);
+        console.log(`::: Server ::: setBrightness ${status}: `, data);
         resolve(data);
       })
       .catch(reject);
@@ -30,5 +44,6 @@ const setBrightness = (value) =>
 
 module.exports = {
   getAllLightControllerInfo,
-  setBrightness
+  toggleLight,
+  setBrightness,
 };

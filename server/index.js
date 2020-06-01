@@ -29,6 +29,19 @@ io.on("connection", (socket) => {
       );
   });
 
+  socket.on("TOGGLE_LIGHT_REQUEST", (value) => {
+    console.log(`::: Server ::: TOGGLE_LIGHT_REQUEST ${value}`);
+
+    api
+      .toggleLight(value)
+      .then((response) =>
+        socket.emit("dispatch", {
+          action: "TOGGLE_LIGHT_RESPONSE",
+          payload: response,
+        })
+      );
+  });
+
   socket.on("SET_BRIGHTNESS_REQUEST", (value) => {
     console.log(`::: Server ::: SET_BRIGHTNESS_REQUEST ${value}`);
 

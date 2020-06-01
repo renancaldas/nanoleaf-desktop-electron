@@ -1,6 +1,8 @@
 import {
   CONTROLLER_INFO_REQUEST,
   CONTROLLER_INFO_RESPONSE,
+  TOGGLE_LIGHT_REQUEST,
+  TOGGLE_LIGHT_RESPONSE,
   SET_BRIGHTNESS_REQUEST,
   SET_BRIGHTNESS_RESPONSE,
 } from "../actions";
@@ -14,6 +16,9 @@ const defaultState = {
 
 export default function reducer(state = defaultState, action) {
   switch (action.type) {
+
+    // Controler Info ---------------------------------------------
+
     case CONTROLLER_INFO_REQUEST: {
       return {
         ...state,
@@ -33,6 +38,31 @@ export default function reducer(state = defaultState, action) {
         },
       };
     }
+
+    // Toggle light ---------------------------------------------
+
+    case TOGGLE_LIGHT_REQUEST: {
+      return {
+        ...state,
+        toggle: {
+          ...state.controllerInfo,
+          loading: true,
+        },
+      };
+    }
+
+    case TOGGLE_LIGHT_RESPONSE: {
+      return {
+        ...state,
+        toggle: {
+          loading: false,
+          data: action.payload,
+        },
+      };
+    }
+
+
+    // Set Brightness ---------------------------------------------
 
     case SET_BRIGHTNESS_REQUEST: {
       return {
@@ -61,11 +91,11 @@ export default function reducer(state = defaultState, action) {
 /* 
 {
     "name": "Light Panels 53:c3:f7",
-    "serialNo": "S18362A0594",
+    "serialNo": "ABCDEFGH",
     "manufacturer": "Nanoleaf",
     "firmwareVersion": "3.3.4",
     "hardwareVersion": "1.6-2",
-    "model": "NL22",
+    "model": "ABC12",
     "cloudHash": {},
     "discovery": {},
     "effects": {

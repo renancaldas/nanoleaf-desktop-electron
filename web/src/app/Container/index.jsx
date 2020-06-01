@@ -11,12 +11,11 @@ const useStyles = makeStyles({
 
 const Container = ({ selectedRoute, setRoute }) => {
   const classes = useStyles();
-
   const isFullscreen = routes.filter(route => route.path === window.location.pathname)[0].isFullscreen;
 
   return (
     <div className={classes.container}>
-      <Content isFullscreen />
+      <Content isFullscreen={isFullscreen} />
       { isFullscreen ? null : <BottomMenu selectedRoute={selectedRoute} setRoute={setRoute} /> }
     </div>
   );
