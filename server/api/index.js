@@ -8,7 +8,10 @@ const getAllLightControllerInfo = () =>
       url: `${baseUrl}/${authToken}`,
     })
       .then(({ data, status }) => {
-        console.log(`::: Server ::: getAllLightControllerInfo ${status}: `, data);
+        console.log(
+          `::: Server ::: getAllLightControllerInfo ${status}: `,
+          data
+        );
         resolve(data);
       })
       .catch(reject);
@@ -19,7 +22,7 @@ const toggleLight = (value) =>
     axios({
       method: "put",
       url: `${baseUrl}/${authToken}/state`,
-      data: { on: { value, }, },
+      data: { on: { value } },
     })
       .then(({ data, status }) => {
         console.log(`::: Server ::: toggleLight ${status}: `, data);
@@ -42,8 +45,38 @@ const setBrightness = (value) =>
       .catch(reject);
   });
 
+const setHue = (value) =>
+  new Promise((resolve, reject) => {
+    axios({
+      method: "put",
+      url: `${baseUrl}/${authToken}/state`,
+      data: { hue: { value } },
+    })
+      .then(({ data, status }) => {
+        console.log(`::: Server ::: setBrightness ${status}: `, data);
+        resolve(data);
+      })
+      .catch(reject);
+  });
+
+const setSaturation = (value) =>
+  new Promise((resolve, reject) => {
+    axios({
+      method: "put",
+      url: `${baseUrl}/${authToken}/state`,
+      data: { sat: { value } },
+    })
+      .then(({ data, status }) => {
+        console.log(`::: Server ::: setBrightness ${status}: `, data);
+        resolve(data);
+      })
+      .catch(reject);
+  });
+
 module.exports = {
   getAllLightControllerInfo,
   toggleLight,
   setBrightness,
+  setHue,
+  setSaturation,
 };

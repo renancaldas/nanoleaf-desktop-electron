@@ -5,6 +5,10 @@ import {
   TOGGLE_LIGHT_RESPONSE,
   SET_BRIGHTNESS_REQUEST,
   SET_BRIGHTNESS_RESPONSE,
+  SET_HUE_REQUEST,
+  SET_HUE_RESPONSE,
+  SET_SATURATION_REQUEST,
+  SET_SATURATION_RESPONSE,
 } from "../actions";
 
 const defaultState = {
@@ -16,7 +20,6 @@ const defaultState = {
 
 export default function reducer(state = defaultState, action) {
   switch (action.type) {
-
     // Controler Info ---------------------------------------------
 
     case CONTROLLER_INFO_REQUEST: {
@@ -61,7 +64,6 @@ export default function reducer(state = defaultState, action) {
       };
     }
 
-
     // Set Brightness ---------------------------------------------
 
     case SET_BRIGHTNESS_REQUEST: {
@@ -77,6 +79,48 @@ export default function reducer(state = defaultState, action) {
       return {
         ...state,
         brightness: {
+          loading: false,
+          data: action.payload,
+        },
+      };
+    }
+
+    // Set Hue ---------------------------------------------
+
+    case SET_HUE_REQUEST: {
+      return {
+        ...state,
+        hue: {
+          loading: true,
+        },
+      };
+    }
+
+    case SET_HUE_RESPONSE: {
+      return {
+        ...state,
+        hue: {
+          loading: false,
+          data: action.payload,
+        },
+      };
+    }
+
+    // Set Saturation ---------------------------------------------
+
+    case SET_SATURATION_REQUEST: {
+      return {
+        ...state,
+        saturation: {
+          loading: true,
+        },
+      };
+    }
+
+    case SET_SATURATION_RESPONSE: {
+      return {
+        ...state,
+        saturation: {
           loading: false,
           data: action.payload,
         },

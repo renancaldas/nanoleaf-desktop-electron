@@ -19,40 +19,56 @@ io.on("connection", (socket) => {
   socket.on("CONTROLLER_INFO_REQUEST", () => {
     console.log(`::: Server ::: CONTROLLER_INFO_REQUEST`);
 
-    api
-      .getAllLightControllerInfo()
-      .then((response) =>
-        socket.emit("dispatch", {
-          action: "CONTROLLER_INFO_RESPONSE",
-          payload: response,
-        })
-      );
+    api.getAllLightControllerInfo().then((response) =>
+      socket.emit("dispatch", {
+        action: "CONTROLLER_INFO_RESPONSE",
+        payload: response,
+      })
+    );
   });
 
   socket.on("TOGGLE_LIGHT_REQUEST", (value) => {
     console.log(`::: Server ::: TOGGLE_LIGHT_REQUEST ${value}`);
 
-    api
-      .toggleLight(value)
-      .then((response) =>
-        socket.emit("dispatch", {
-          action: "TOGGLE_LIGHT_RESPONSE",
-          payload: response,
-        })
-      );
+    api.toggleLight(value).then((response) =>
+      socket.emit("dispatch", {
+        action: "TOGGLE_LIGHT_RESPONSE",
+        payload: response,
+      })
+    );
   });
 
   socket.on("SET_BRIGHTNESS_REQUEST", (value) => {
     console.log(`::: Server ::: SET_BRIGHTNESS_REQUEST ${value}`);
 
-    api
-      .setBrightness(value)
-      .then((response) =>
-        socket.emit("dispatch", {
-          action: "SET_BRIGHTNESS_RESPONSE",
-          payload: response,
-        })
-      );
+    api.setBrightness(value).then((response) =>
+      socket.emit("dispatch", {
+        action: "SET_BRIGHTNESS_RESPONSE",
+        payload: response,
+      })
+    );
+  });
+
+  socket.on("SET_HUE_REQUEST", (value) => {
+    console.log(`::: Server ::: SET_HUE_REQUEST ${value}`);
+
+    api.setHue(value).then((response) =>
+      socket.emit("dispatch", {
+        action: "SET_HUE_RESPONSE",
+        payload: response,
+      })
+    );
+  });
+
+  socket.on("SET_SATURATION_REQUEST", (value) => {
+    console.log(`::: Server ::: SET_SATURATION_REQUEST ${value}`);
+
+    api.setSaturation(value).then((response) =>
+      socket.emit("dispatch", {
+        action: "SET_SATURATION_RESPONSE",
+        payload: response,
+      })
+    );
   });
 });
 

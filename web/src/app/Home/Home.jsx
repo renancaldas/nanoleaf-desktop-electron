@@ -9,11 +9,15 @@ import Typography from "@material-ui/core/Typography";
 
 import Slider from "../Components/Slider";
 import Toggle from "../Components/Toggle";
+import ColorHue from "../Components/ColorHue";
+import ColorSaturation from "../Components/ColorSaturation";
 
 import {
   getControllerInfoAction,
   toggleLight,
   setBrightness,
+  setHue,
+  setSaturation
 } from "../../redux/actions/Nanoleaf";
 
 const useStyles = makeStyles({
@@ -23,10 +27,10 @@ const useStyles = makeStyles({
     padding: "20px",
   },
   header: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between'
-  }
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
 });
 
 const Home = () => {
@@ -53,25 +57,49 @@ const Home = () => {
     dispatch(setBrightness(value));
   };
 
+  const onChangeHue = (value) => {
+    console.log("onChangeHue: ", value);
+    dispatch(setHue(value));
+  };
+
+  const onChangeSaturation = (value) => {
+    console.log("onChangeSaturation: ", value);
+    dispatch(setSaturation(value));
+  };
+
   return (
     <div className={classes.container}>
       <div className={classes.header}>
         <Typography color="textPrimary">Nanoleaf</Typography>
         <Toggle onChange={onToggleLight} />
       </div>
+
       <br />
+
       <Card raised>
         <CardContent>
           <Slider title="Brightness" onChange={onChangeBrighness} />
         </CardContent>
       </Card>
+
       <br />
+
       <Card raised>
         <CardContent>
-          <Slider title="Color" onChange={onChangeBrighness} />
+          <ColorHue title="Color" onChange={onChangeHue}/>
         </CardContent>
       </Card>
+
       <br />
+
+      <Card raised>
+        <CardContent>
+          <ColorSaturation title="Saturation" onChange={onChangeSaturation}/>
+        </CardContent>
+      </Card>
+
+      <br />
+
       <Button variant="contained" color="secondary" onClick={onClickButton}>
         Dispatch getControllerInfoAction
       </Button>
