@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 
 import Card from "@material-ui/core/Card";
@@ -6,25 +7,22 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-
 import Slider from "./Slider";
+
+import { getControllerInfoAction, setBrightness } from "../../redux/actions/Nanoleaf";
 
 const useStyles = makeStyles({
   container: {
     height: "100%",
     backgroundColor: "#282c34",
-  },
-  root: {
-    minWidth: 275,
+    padding: "20px",
   },
   bullet: {
     display: "inline-block",
     margin: "0 2px",
     transform: "scale(0.8)",
   },
-  title: {
-    fontSize: 14,
-  },
+
   pos: {
     marginBottom: 12,
   },
@@ -32,43 +30,34 @@ const useStyles = makeStyles({
 
 const Home = () => {
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
+  const dispatch = useDispatch();
+  const controllerInfo = useSelector((state) => state.Nanoleaf.controllerInfo);
+
+  useEffect(() => {
+    console.log(">>> controllerInfo", controllerInfo);
+  }, [controllerInfo]);
+
+  const onClickButton = () => {
+    console.log("Clicked on button");
+    dispatch(getControllerInfoAction());
+  };
+
+  const onChangeBrighness = (value) => {
+    console.log("Brightness: ", value);
+    dispatch(setBrightness(value));
+  };
 
   return (
     <div className={classes.container}>
-      <Card className={classes.root}>
+      <Card>
         <CardContent>
-          <Typography
-            className={classes.title}
-            color="textSecondary"
-            gutterBottom
-          >
-            Word of the Day
-          </Typography>
-
-          {/* Slider */}
-          <Slider />
-
-
-          <Typography variant="h5" component="h2">
-            be{bull}nev{bull}o{bull}lent
-          </Typography>
-          <Typography className={classes.pos} color="textSecondary">
-            adjective
-          </Typography>
-          <Typography variant="body2" component="p">
-            well meaning and kindly.
-            <br />
-            {'"a benevolent smile"'}
-          </Typography>
+          <Typography>Nanoleaf</Typography>
+          <br />
+          <Slider title="Brightness" onChange={onChangeBrighness} />
         </CardContent>
         <CardActions>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => alert("yay")}
-          >
-            Hello World
+          <Button variant="contained" color="primary" onClick={onClickButton}>
+            Dispatch getControllerInfoAction
           </Button>
         </CardActions>
       </Card>

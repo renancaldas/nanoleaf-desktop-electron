@@ -14,6 +14,21 @@ const getAllLightControllerInfo = () =>
       .catch(reject);
   });
 
+const setBrightness = (value) =>
+  new Promise((resolve, reject) => {
+    axios({
+      method: "put",
+      url: `${baseUrl}/${authToken}/state`,
+      data: { brightness: { value, duration: 0 } },
+    })
+      .then(({ data, status }) => {
+        console.log(`::: Server ::: Status ${status}: `, data);
+        resolve(data);
+      })
+      .catch(reject);
+  });
+
 module.exports = {
   getAllLightControllerInfo,
+  setBrightness
 };

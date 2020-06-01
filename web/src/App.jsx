@@ -1,27 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 
-import Container from './app/Container';
+import { useDispatch } from "react-redux";
+import Container from "./app/Container";
 
-import socketio from './api/socketio';
+import socket from "./api/socketio";
 
 const App = (props) => {
-  const [selectedRoute, setRoute] = useState(window.location.pathname);
+  const [selectedRoute, setRoute] = useState(window.location.pathname); // rendering twice
+  const dispatch = useDispatch();
 
-  console.log(':: App :: props: ', props);
+  useEffect(() => {
+    console.log(":: App :: props: ", props);
+
+    socket.on("dispatch", ({ action, payload }) => {
+      console.log(`:: App | dispatch | ${action} :: `, payload);
+      dispatch({ type: action, payload });
+    });
+  }, []);
 
   const onChangeRoute = (route) => {
-    setRoute(route)
-  }
+    setRoute(route);
+  };
 
   return (
     <BrowserRouter>
-      <Container
-        selectedRoute={selectedRoute}
-        setRoute={onChangeRoute}
-      />
+      <Container selectedRoute={selectedRoute} setRoute={onChangeRoute} />
     </BrowserRouter>
   );
-}
+};
 
 export default App;

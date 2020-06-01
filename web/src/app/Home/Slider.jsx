@@ -10,26 +10,45 @@ const useStyles = makeStyles({
   root: {
     width: 200,
   },
+  title: {
+    fontSize: 14,
+  },
+  center: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  leftIcon: {
+    width: 15,
+    height: 15,
+  },
 });
 
-export default function ContinuousSlider() {
+const SliderComponent = ({ title = "Title", initialValue = 0, onChange }) => {
   const classes = useStyles();
-  const [value, setValue] = React.useState(30);
+  const [value, setValue] = React.useState(initialValue);
 
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    if (value !== newValue) {
+      setValue(newValue);
+      onChange(newValue);
+    }
   };
 
   return (
     <div className={classes.root}>
-      <Typography id="continuous-slider" gutterBottom>
-        Volume
+      <Typography
+        className={classes.title}
+        color="textSecondary"
+        gutterBottom
+      >
+        {title}
       </Typography>
       <Grid container spacing={2}>
-        <Grid item>
-          <BrightnessLow />
+        <Grid className={classes.center} item>
+          <BrightnessLow className={classes.leftIcon} />
         </Grid>
-        <Grid item xs>
+        <Grid className={classes.center} item xs>
           <Slider
             marks
             value={value}
@@ -39,10 +58,12 @@ export default function ContinuousSlider() {
             max={100}
           />
         </Grid>
-        <Grid item>
+        <Grid className={classes.center} item>
           <BrightnessHigh />
         </Grid>
       </Grid>
     </div>
   );
-}
+};
+
+export default SliderComponent;
