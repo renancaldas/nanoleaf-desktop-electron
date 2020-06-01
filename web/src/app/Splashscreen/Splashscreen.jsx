@@ -9,12 +9,12 @@ const useStyles = makeStyles({
   },
 });
 
-const About = () => {
+const Splashscreen = () => {
   const classes = useStyles();
 
   return (
     <div className={classes.container}>
-      <div>About</div>
+      <div>Splashscreen</div>
 
       <Button variant="contained" color="primary" onClick={() => alert("yay")}>
         Hello World
@@ -23,4 +23,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default Splashscreen;

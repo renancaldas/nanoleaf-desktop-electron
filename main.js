@@ -1,6 +1,10 @@
 // Modules to control application life and create native browser window
+const server = require('./server')
+console.log(':: NodeJS server ::', server)
+
 const {app, BrowserWindow} = require('electron')
 const path = require('path')
+
 
 function createWindow () {
   // Create the browser window.
@@ -16,7 +20,7 @@ function createWindow () {
   // mainWindow.loadFile('index.html')
   setTimeout(() => {
     mainWindow.loadURL('http://localhost:3000/')
-  }, 1000)
+  }, 2000)
   
 
   // Open the DevTools.

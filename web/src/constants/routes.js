@@ -4,22 +4,35 @@ import React from 'react';
 
 import Home from '../app/Home/Home';
 import About from '../app/About/About';
+import Splashscreen from '../app/Splashscreen/Splashscreen';
 
-import RestoreIcon from '@material-ui/icons/Restore';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import SettingIcon from '@material-ui/icons/Settings';
 
 const routes = [
     {
+        isDashboardMenu: true,
+        isFullscreen: false,
         label: 'Home',
         path: '/',
         component: <Home />,
-        icon: <FavoriteIcon />
+        icon: <DashboardIcon />
     },
     {
-        label: 'About',
+        isDashboardMenu: true,
+        isFullscreen: false,
+        label: 'Settings',
         path: '/about',
         component: <About />,
-        icon: <RestoreIcon />
+        icon: <SettingIcon />
+    },
+    {
+        isDashboardMenu: false,
+        isFullscreen: true,
+        label: null,
+        path: '/splash',
+        component: <Splashscreen />,
+        icon: null
     }
 ]
 
