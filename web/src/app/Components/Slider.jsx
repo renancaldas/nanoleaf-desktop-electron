@@ -21,23 +21,25 @@ const useStyles = makeStyles({
   },
 });
 
-const SliderComponent = ({ title = "Title", initialValue = 0, onChange, value }) => {
+const SliderComponent = ({
+  title = "Title",
+  onChange,
+  value,
+}) => {
   const classes = useStyles();
+  const [stateValue, setStateValue] = React.useState(value);
 
   const handleChange = (event, newValue) => {
-    if (value !== newValue) {
-      console.log('OldValue / newValue', value, newValue)
+    if (stateValue !== newValue) {
+      console.log("OldValue / newValue", value, newValue);
+      setStateValue(newValue);
       onChange(newValue);
     }
   };
 
   return (
     <div>
-      <Typography
-        className={classes.title}
-        color="textSecondary"
-        gutterBottom
-      >
+      <Typography className={classes.title} color="textSecondary" gutterBottom>
         {title}
       </Typography>
       <Grid container spacing={2}>
@@ -47,7 +49,7 @@ const SliderComponent = ({ title = "Title", initialValue = 0, onChange, value })
         <Grid className={classes.center} item xs>
           <Slider
             marks
-            value={value}
+            value={stateValue}
             onChange={handleChange}
             step={10}
             min={0}

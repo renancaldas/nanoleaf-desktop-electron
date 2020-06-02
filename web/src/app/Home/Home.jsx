@@ -74,7 +74,7 @@ const Home = () => {
     dispatch(setEffect(value));
   };
 
-  return (
+  return controllerInfo && (
     <div className={classes.container}>
       <div className={classes.header}>
         <Typography color="textPrimary">Nanoleaf</Typography>
