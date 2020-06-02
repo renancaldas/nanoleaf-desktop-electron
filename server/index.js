@@ -20,7 +20,7 @@ io.on("connection", (socket) => {
     console.log(`::: Server ::: CONTROLLER_INFO_REQUEST`);
 
     api.getAllLightControllerInfo().then((response) =>
-      socket.emit("dispatch", {
+      io.sockets.emit("dispatch", {
         action: "CONTROLLER_INFO_RESPONSE",
         payload: response,
       })
@@ -31,7 +31,7 @@ io.on("connection", (socket) => {
     console.log(`::: Server ::: TOGGLE_LIGHT_REQUEST ${value}`);
 
     api.toggleLight(value).then((response) =>
-      socket.emit("dispatch", {
+      io.sockets.emit("dispatch", {
         action: "TOGGLE_LIGHT_RESPONSE",
         payload: response,
       })
@@ -42,7 +42,7 @@ io.on("connection", (socket) => {
     console.log(`::: Server ::: SET_BRIGHTNESS_REQUEST ${value}`);
 
     api.setBrightness(value).then((response) =>
-      socket.emit("dispatch", {
+      io.sockets.emit("dispatch", {
         action: "SET_BRIGHTNESS_RESPONSE",
         payload: response,
       })
@@ -53,7 +53,7 @@ io.on("connection", (socket) => {
     console.log(`::: Server ::: SET_HUE_REQUEST ${value}`);
 
     api.setHue(value).then((response) =>
-      socket.emit("dispatch", {
+      io.sockets.emit("dispatch", {
         action: "SET_HUE_RESPONSE",
         payload: response,
       })
@@ -64,7 +64,7 @@ io.on("connection", (socket) => {
     console.log(`::: Server ::: SET_SATURATION_REQUEST ${value}`);
 
     api.setSaturation(value).then((response) =>
-      socket.emit("dispatch", {
+      io.sockets.emit("dispatch", {
         action: "SET_SATURATION_RESPONSE",
         payload: response,
       })
@@ -75,7 +75,7 @@ io.on("connection", (socket) => {
     console.log(`::: Server ::: SET_EFFECT_REQUEST ${value}`);
 
     api.setEffect(value).then((response) =>
-      socket.emit("dispatch", {
+      io.sockets.emit("dispatch", {
         action: "SET_EFFECT_RESPONSE",
         payload: response,
       })

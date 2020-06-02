@@ -21,13 +21,12 @@ const useStyles = makeStyles({
   },
 });
 
-const SliderComponent = ({ title = "Title", initialValue = 0, onChange }) => {
+const SliderComponent = ({ title = "Title", initialValue = 0, onChange, value }) => {
   const classes = useStyles();
-  const [value, setValue] = React.useState(initialValue);
 
   const handleChange = (event, newValue) => {
     if (value !== newValue) {
-      setValue(newValue);
+      console.log('OldValue / newValue', value, newValue)
       onChange(newValue);
     }
   };

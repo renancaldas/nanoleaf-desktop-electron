@@ -26,7 +26,7 @@ const toggleLight = (value) =>
     })
       .then(({ data, status }) => {
         console.log(`::: Server ::: toggleLight ${status}: `, data);
-        resolve(data);
+        getAllLightControllerInfo().then(resolve);
       })
       .catch(reject);
   });
@@ -40,7 +40,7 @@ const setBrightness = (value) =>
     })
       .then(({ data, status }) => {
         console.log(`::: Server ::: setBrightness ${status}: `, data);
-        resolve(data);
+        getAllLightControllerInfo().then(resolve);
       })
       .catch(reject);
   });
@@ -54,7 +54,7 @@ const setHue = (value) =>
     })
       .then(({ data, status }) => {
         console.log(`::: Server ::: setBrightness ${status}: `, data);
-        resolve(data);
+        getAllLightControllerInfo().then(resolve);
       })
       .catch(reject);
   });
@@ -68,7 +68,7 @@ const setSaturation = (value) =>
     })
       .then(({ data, status }) => {
         console.log(`::: Server ::: setBrightness ${status}: `, data);
-        resolve(data);
+        getAllLightControllerInfo().then(resolve);
       })
       .catch(reject);
   });
@@ -82,7 +82,7 @@ const setEffect = (value) =>
     })
       .then(({ data, status }) => {
         console.log(`::: Server ::: setBrightness ${status}: `, data);
-        resolve(data);
+        getAllLightControllerInfo().then(resolve);
       })
       .catch(reject);
   });

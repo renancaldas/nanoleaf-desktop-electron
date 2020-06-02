@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
+// import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
 import Slider from "../Components/Slider";
@@ -22,7 +22,6 @@ import {
   setEffect,
 } from "../../redux/actions/Nanoleaf";
 
-
 const useStyles = makeStyles({
   container: {
     height: "100%",
@@ -39,16 +38,16 @@ const useStyles = makeStyles({
 const Home = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const controllerInfo = useSelector((state) => state.Nanoleaf.controllerInfo);
+  const { loading, controllerInfo } = useSelector((state) => state.Nanoleaf);
 
-  useEffect(() => {
-    console.log(">>> controllerInfo", controllerInfo);
-  }, [controllerInfo]);
+  const isOn = controllerInfo && controllerInfo.state.on.value ? controllerInfo.state.on.value : false;
+  const brightness = controllerInfo && controllerInfo.state.brightness.value ? controllerInfo.state.brightness.value : 0;
 
-  const onClickButton = () => {
-    console.log("Clicked on button");
-    dispatch(getControllerInfoAction());
-  };
+  React.useEffect(() => {
+    if (!loading && !controllerInfo) {
+      dispatch(getControllerInfoAction());
+    }
+  }, [loading, controllerInfo]);
 
   const onToggleLight = (value) => {
     console.log("Toggled light");
@@ -82,14 +81,14 @@ const Home = () => {
 
         <EffectList onChange={onChangeEffect} />
 
-        <Toggle onChange={onToggleLight} />
+        <Toggle onChange={onToggleLight} isOn={isOn} />
       </div>
 
       <br />
 
       <Card raised>
         <CardContent>
-          <Slider title="Brightness" onChange={onChangeBrighness} />
+          <Slider title="Brightness" onChange={onChangeBrighness} value={brightness} />
         </CardContent>
       </Card>
 
@@ -109,11 +108,6 @@ const Home = () => {
         </CardContent>
       </Card>
 
-      <br />
-
-      <Button variant="contained" color="secondary" onClick={onClickButton}>
-        Dispatch getControllerInfoAction
-      </Button>
     </div>
   );
 };

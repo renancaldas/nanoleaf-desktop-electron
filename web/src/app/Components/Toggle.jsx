@@ -1,18 +1,19 @@
 import React from 'react';
 import Switch from '@material-ui/core/Switch';
 
-const Toggle = ({ onChange }) => {
-  const [checked, setChecked] = React.useState(false);
+const Toggle = ({ isOn, onChange }) => {
+  React.useEffect(() => {
+    console.log(':: isOn', isOn)
+  }, [isOn]);
 
   const handleChange = (event) => {
-    setChecked(event.target.checked);
     onChange(event.target.checked)
   };
 
   return (
     <div>
       <Switch
-        checked={checked}
+        checked={isOn}
         onChange={handleChange}
       />
     </div>
