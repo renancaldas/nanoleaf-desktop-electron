@@ -21,18 +21,22 @@ const useStyles = makeStyles({
   },
 });
 
-const SliderComponent = ({
-  title = "Title",
-  onChange,
-  value,
-}) => {
+const SliderComponent = ({ title = "Title", onChange, value }) => {
   const classes = useStyles();
   const [stateValue, setStateValue] = React.useState(value);
 
+  React.useEffect(() => {
+    setStateValue(value);
+  }, [value]);
+
   const handleChange = (event, newValue) => {
     if (stateValue !== newValue) {
-      console.log("OldValue / newValue", value, newValue);
       setStateValue(newValue);
+    }
+  };
+
+  const handleChangeCommited = (event, newValue) => {
+    if (value !== newValue) {
       onChange(newValue);
     }
   };
@@ -51,6 +55,7 @@ const SliderComponent = ({
             marks
             value={stateValue}
             onChange={handleChange}
+            onChangeCommitted={handleChangeCommited}
             step={10}
             min={0}
             max={100}

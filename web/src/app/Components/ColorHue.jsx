@@ -11,16 +11,20 @@ const useStyles = makeStyles({
   },
 });
 
-const ColorAlpha = ({ title, onChange }) => {
+const ColorHue = ({ title, onChange, hue, saturation, brightness }) => {
   const classes = useStyles();
-  const [hue, setHue] = React.useState();
+  const [hueState, setHueState] = React.useState(hue);
+
+  React.useEffect(() => {
+    setHueState(hue);
+  }, [hue]);
 
   const onChangeStateHue = (color, event) => {
-    setHue(color.hex);
+    setHueState(color.hsl.h);
   };
 
   const onChangeHue = (color, event) => {
-    setHue(color.hex);
+    setHueState(color.hsl.h);
     onChange(parseInt(color.hsl.h))
   };
 
@@ -33,10 +37,10 @@ const ColorAlpha = ({ title, onChange }) => {
         width="100%"
         onChange={onChangeStateHue}
         onChangeComplete={onChangeHue}
-        color={hue}
+        color={{ h: hueState, s: saturation, l: brightness }}
       />
     </div>
   );
 };
 
-export default ColorAlpha;
+export default ColorHue;

@@ -19,17 +19,27 @@ const useStyles = makeStyles({
   },
 });
 
-const ColorSaturation = ({ title, onChange }) => {
+const getColorObject = (hue, saturation) => {
+  return { h: hue, s: 1, l: 0.5, a: saturation / 100 };
+};
+
+const ColorSaturation = ({ title, onChange, hue, saturation }) => {
   const classes = useStyles();
-  const [saturation, setSaturation] = React.useState();
+  const [saturationState, setSaturationState] = React.useState(
+    getColorObject(hue, saturation)
+  );
+
+  React.useEffect(() => {
+    setSaturationState(getColorObject(hue, saturation));
+  }, [hue, saturation]);
 
   const onChangeStateSaturation = (color, event) => {
-    setSaturation(color.hsl);
+    setSaturationState(color.hsl);
   };
 
   const onChangeSaturation = (color, event) => {
-    setSaturation(color.hsl);
-    onChange(parseInt(color.hsl.a * 100))
+    setSaturationState(color.hsl);
+    onChange(parseInt(color.hsl.a * 100));
   };
 
   return (
@@ -41,7 +51,7 @@ const ColorSaturation = ({ title, onChange }) => {
         width="100%"
         onChange={onChangeStateSaturation}
         onChangeComplete={onChangeSaturation}
-        color={saturation}
+        color={saturationState}
       />
     </div>
   );

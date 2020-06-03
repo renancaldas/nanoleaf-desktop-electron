@@ -40,8 +40,22 @@ const Home = () => {
   const dispatch = useDispatch();
   const { loading, controllerInfo } = useSelector((state) => state.Nanoleaf);
 
-  const isOn = controllerInfo && controllerInfo.state.on.value ? controllerInfo.state.on.value : false;
-  const brightness = controllerInfo && controllerInfo.state.brightness.value ? controllerInfo.state.brightness.value : 0;
+  const isOn =
+    controllerInfo && controllerInfo.state.on.value
+      ? controllerInfo.state.on.value
+      : false;
+  const hue =
+    controllerInfo && controllerInfo.state.hue.value
+      ? controllerInfo.state.hue.value
+      : 0;
+  const saturation =
+    controllerInfo && controllerInfo.state.sat.value
+      ? controllerInfo.state.sat.value
+      : 0;
+  const brightness =
+    controllerInfo && controllerInfo.state.brightness.value
+      ? controllerInfo.state.brightness.value
+      : 0;
 
   React.useEffect(() => {
     if (!loading && !controllerInfo) {
@@ -74,41 +88,57 @@ const Home = () => {
     dispatch(setEffect(value));
   };
 
-  return controllerInfo && (
-    <div className={classes.container}>
-      <div className={classes.header}>
-        <Typography color="textPrimary">Nanoleaf</Typography>
+  return (
+    controllerInfo && (
+      <div className={classes.container}>
+        <div className={classes.header}>
+          <Typography color="textPrimary">Nanoleaf</Typography>
 
-        <EffectList onChange={onChangeEffect} />
+          <EffectList onChange={onChangeEffect} />
 
-        <Toggle onChange={onToggleLight} isOn={isOn} />
+          <Toggle onChange={onToggleLight} isOn={isOn} />
+        </div>
+
+        <br />
+
+        <Card raised>
+          <CardContent>
+            <Slider
+              title="Brightness"
+              onChange={onChangeBrighness}
+              value={brightness}
+            />
+          </CardContent>
+        </Card>
+
+        <br />
+
+        <Card raised>
+          <CardContent>
+            <ColorHue
+              title="Color"
+              onChange={onChangeHue}
+              hue={hue}
+              saturation={saturation}
+              brightness={brightness}
+            />
+          </CardContent>
+        </Card>
+
+        <br />
+
+        <Card raised>
+          <CardContent>
+            <ColorSaturation
+              title="Saturation"
+              onChange={onChangeSaturation}
+              hue={hue}
+              saturation={saturation}
+            />
+          </CardContent>
+        </Card>
       </div>
-
-      <br />
-
-      <Card raised>
-        <CardContent>
-          <Slider title="Brightness" onChange={onChangeBrighness} value={brightness} />
-        </CardContent>
-      </Card>
-
-      <br />
-
-      <Card raised>
-        <CardContent>
-          <ColorHue title="Color" onChange={onChangeHue} />
-        </CardContent>
-      </Card>
-
-      <br />
-
-      <Card raised>
-        <CardContent>
-          <ColorSaturation title="Saturation" onChange={onChangeSaturation} />
-        </CardContent>
-      </Card>
-
-    </div>
+    )
   );
 };
 
