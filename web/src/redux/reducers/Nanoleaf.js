@@ -11,11 +11,14 @@ import {
   SET_SATURATION_RESPONSE,
   SET_EFFECT_REQUEST,
   SET_EFFECT_RESPONSE,
+  CONFIG_RESPONSE,
+  SET_CONFIG_RESPONSE,
 } from "../actions";
 
 const defaultState = {
   loading: false,
   controllerInfo: null,
+  config: null,
 };
 
 export default function reducer(state = defaultState, action) {
@@ -42,6 +45,20 @@ export default function reducer(state = defaultState, action) {
         ...state,
         loading: false,
         controllerInfo: action.payload,
+      };
+    }
+
+    case CONFIG_RESPONSE: {
+      return {
+        ...state,
+        config: action.payload,
+      };
+    }
+
+    case SET_CONFIG_RESPONSE: {
+      return {
+        ...state,
+        config: action.payload,
       };
     }
 

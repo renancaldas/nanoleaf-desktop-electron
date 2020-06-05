@@ -9,14 +9,14 @@ import store from "./redux/store";
 
 // Material UI
 import { ThemeProvider } from "@material-ui/styles";
-import cyan from "@material-ui/core/colors/cyan";
+import color from "@material-ui/core/colors/green";
 
 import { createMuiTheme } from "@material-ui/core";
 
 const theme = createMuiTheme({
   palette: {
     type: "dark",
-    primary: cyan,
+    primary: color,
   },
 });
 

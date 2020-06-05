@@ -13,6 +13,7 @@ const Toggle = ({ isOn, onChange }) => {
   return (
     <div>
       <Switch
+        color="primary"
         checked={isOn}
         onChange={handleChange}
       />

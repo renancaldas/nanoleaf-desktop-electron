@@ -4,7 +4,9 @@ import {
   SET_BRIGHTNESS_REQUEST,
   SET_HUE_REQUEST,
   SET_SATURATION_REQUEST,
-  SET_EFFECT_REQUEST
+  SET_EFFECT_REQUEST,
+  CONFIG_REQUEST,
+  SET_CONFIG_REQUEST,
 } from "./index";
 import socket from "../../api/socketio";
 
@@ -53,5 +55,21 @@ export function setEffect(value) {
 
   return {
     type: SET_EFFECT_REQUEST,
+  };
+}
+
+export function getConfig() {
+  socket.emit(CONFIG_REQUEST);
+
+  return {
+    type: CONFIG_REQUEST,
+  };
+}
+
+export function setConfig(value) {
+  socket.emit(SET_CONFIG_REQUEST, value);
+
+  return {
+    type: SET_CONFIG_REQUEST,
   };
 }
